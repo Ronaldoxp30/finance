@@ -1,0 +1,275 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#0f172a;
+  color:#fff;
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* LOGIN */
+
+.auth-container{
+  width:100%;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.auth-box{
+  width:350px;
+  background:#1e293b;
+  padding:30px;
+  border-radius:20px;
+}
+
+.auth-box h1{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.tabs{
+  display:flex;
+  margin-bottom:20px;
+}
+
+.tabs button{
+  flex:1;
+  padding:12px;
+  border:none;
+  cursor:pointer;
+  background:#334155;
+  color:#fff;
+}
+
+.tabs .active{
+  background:#10b981;
+}
+
+.auth-box input{
+  width:100%;
+  padding:14px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:10px;
+  outline:none;
+}
+
+.auth-box button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:#10b981;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* SISTEMA */
+
+.container{
+  padding:20px;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.logout{
+  background:red;
+  border:none;
+  padding:10px 15px;
+  border-radius:10px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+
+.card{
+  padding:25px;
+  border-radius:20px;
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+.card p{
+  font-size:28px;
+  font-weight:bold;
+}
+
+.entrada{
+  background:#065f46;
+}
+
+.saida{
+  background:#7f1d1d;
+}
+
+.total{
+  background:#1d4ed8;
+}
+
+.acoes{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.btn{
+  flex:1;
+  padding:15px;
+  border:none;
+  border-radius:15px;
+  color:#fff;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.entrada-btn{
+  background:#10b981;
+}
+
+.saida-btn{
+  background:#ef4444;
+}
+
+.filtro{
+  margin-top:20px;
+}
+
+.filtro select{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+}
+
+.lista{
+  margin-top:20px;
+}
+
+.item{
+  background:#1e293b;
+  padding:15px;
+  border-radius:15px;
+  margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  background:rgba(0,0,0,0.7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content{
+  width:350px;
+  background:#1e293b;
+  padding:25px;
+  border-radius:20px;
+}
+
+.modal-content h2{
+  margin-bottom:20px;
+}
+
+.modal-content input{
+  width:100%;
+  padding:14px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:10px;
+}
+
+.modal-content button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:#10b981;
+  color:#fff;
+  cursor:pointer;
+}
+
+.fechar{
+  background:red !important;
+  margin-top:10px;
+}
+/* ============================
+GRÁFICO
+============================ */
+
+.grafico-area{
+  margin-top:30px;
+  background:#1e293b;
+  padding:20px;
+  border-radius:20px;
+}
+
+/* ============================
+EXPORTAR
+============================ */
+
+.exportar-area{
+  margin-top:20px;
+  display:flex;
+  gap:10px;
+}
+
+.exportar-area select{
+  flex:1;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+}
+
+.exportar-area button{
+  padding:14px 20px;
+  border:none;
+  border-radius:10px;
+  background:#2563eb;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* ============================
+RODAPÉ
+============================ */
+
+.rodape{
+  width:100%;
+  text-align:center;
+  padding:30px 10px;
+  margin-top:40px;
+  color:#94a3b8;
+  font-size:14px;
+}

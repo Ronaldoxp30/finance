@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle Financeiro</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+
+  <!-- LOGIN / CADASTRO -->
+  <div class="auth-container" id="authContainer">
+
+    <div class="auth-box">
+
+      <h1>Controle Financeiro</h1>
+
+      <div class="tabs">
+        <button id="btnLoginTab" class="active">
+          Login
+        </button>
+
+        <button id="btnCadastroTab">
+          Cadastro
+        </button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginBox">
+
+        <input
+          type="text"
+          id="loginTelefone"
+          placeholder="Número de celular"
+        >
+
+        <input
+          type="password"
+          id="loginSenha"
+          maxlength="6"
+          placeholder="Senha de 6 dígitos"
+        >
+
+        <button onclick="fazerLogin()">
+          Entrar
+        </button>
+
+      </div>
+
+      <!-- CADASTRO -->
+      <div id="cadastroBox" class="hidden">
+
+        <input
+          type="text"
+          id="cadastroNome"
+          placeholder="Seu nome"
+        >
+
+        <input
+          type="text"
+          id="cadastroTelefone"
+          placeholder="Número de celular"
+        >
+
+        <input
+          type="password"
+          id="cadastroSenha"
+          maxlength="6"
+          placeholder="Senha de 6 dígitos"
+        >
+
+        <button onclick="fazerCadastro()">
+          Cadastrar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SISTEMA -->
+  <div class="container hidden" id="appContainer">
+
+    <header>
+
+      <h2 id="tituloPainel">
+  Painel Financeiro
+</h2>
+
+      <button class="logout" onclick="logout()">
+        Sair
+      </button>
+
+    </header>
+
+    <!-- CARDS -->
+    <section class="cards">
+
+      <div class="card entrada">
+        <h3>Entradas</h3>
+        <p id="totalEntradas">R$ 0,00</p>
+      </div>
+
+      <div class="card saida">
+        <h3>Saídas</h3>
+        <p id="totalSaidas">R$ 0,00</p>
+      </div>
+
+      <div class="card total">
+        <h3>Total</h3>
+        <p id="saldoTotal">R$ 0,00</p>
+      </div>
+
+    </section>
+
+    <!-- BOTÕES -->
+    <section class="acoes">
+
+      <button
+        class="btn entrada-btn"
+        onclick="abrirModal('entrada')"
+      >
+        + Nova Entrada
+      </button>
+
+      <button
+        class="btn saida-btn"
+        onclick="abrirModal('saida')"
+      >
+        - Nova Saída
+      </button>
+
+    </section>
+
+    <!-- FILTRO -->
+    <section class="filtro">
+
+      <select id="filtroTipo" onchange="carregarMovimentacoes()">
+
+        <option value="todos">
+          Todos
+        </option>
+
+        <option value="entrada">
+          Entradas
+        </option>
+
+        <option value="saida">
+          Saídas
+        </option>
+
+      </select>
+
+    </section>
+
+    <!-- LISTA -->
+    <section
+      class="lista"
+      id="listaMovimentacoes"
+    ></section>
+
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal hidden" id="modal">
+
+    <div class="modal-content">
+
+      <h2 id="tituloModal">
+        Nova Entrada
+      </h2>
+
+      <input
+        type="number"
+        id="valor"
+        placeholder="Valor"
+      >
+
+      <input
+        type="text"
+        id="descricao"
+        placeholder="Descrição"
+      >
+
+      <button onclick="salvarMovimentacao()">
+        Salvar
+      </button>
+
+      <button
+        class="fechar"
+        onclick="fecharModal()"
+      >
+        Cancelar
+      </button>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+  <!-- CHART -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- GRÁFICO -->
+<section class="grafico-area">
+
+  <canvas id="graficoFinanceiro"></canvas>
+
+</section>
+
+<!-- EXPORTAR -->
+<section class="exportar-area">
+
+  <select id="tipoExportacao">
+
+    <option value="todos">
+      Exportar Tudo
+    </option>
+
+    <option value="entrada">
+      Somente Entradas
+    </option>
+
+    <option value="saida">
+      Somente Saídas
+    </option>
+
+  </select>
+
+  <button onclick="exportarHistorico()">
+    Exportar Histórico
+  </button>
+
+</section>
+
+<!-- RODAPÉ -->
+<footer class="rodape">
+
+  Desenvolvido por Ronaldo Silva dos Santos
+
+</footer>
+</body>
+</html>
