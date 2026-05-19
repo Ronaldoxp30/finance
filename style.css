@@ -273,3 +273,542 @@ RODAPÉ
   color:#94a3b8;
   font-size:14px;
 }
+/* ============================
+RESET
+============================ */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+/* ============================
+BODY
+============================ */
+
+body{
+
+  background:#0f172a;
+
+  color:#fff;
+
+  min-height:100vh;
+
+  padding:20px;
+}
+
+/* ============================
+CONTAINER
+============================ */
+
+.container{
+
+  max-width:1200px;
+
+  margin:auto;
+}
+
+/* ============================
+HEADER
+============================ */
+
+header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+  gap:20px;
+
+  margin-bottom:30px;
+}
+
+#tituloPainel{
+
+  font-size:34px;
+
+  font-weight:bold;
+}
+
+.topo-direita{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+}
+
+/* ============================
+BOTÕES
+============================ */
+
+button{
+
+  border:none;
+
+  border-radius:14px;
+
+  padding:14px 22px;
+
+  cursor:pointer;
+
+  font-weight:bold;
+
+  transition:0.3s;
+}
+
+button:hover{
+
+  transform:scale(1.03);
+}
+
+.btn-entrada{
+
+  background:#10b981;
+
+  color:#fff;
+}
+
+.btn-saida{
+
+  background:#ef4444;
+
+  color:#fff;
+}
+
+.btn-finalizar{
+
+  background:#2563eb;
+
+  color:#fff;
+}
+
+.btn-historico{
+
+  background:#7c3aed;
+
+  color:#fff;
+}
+
+.logout{
+
+  background:#dc2626;
+
+  color:#fff;
+}
+
+/* ============================
+CARDS
+============================ */
+
+.cards{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(250px,1fr));
+
+  gap:20px;
+
+  margin-bottom:30px;
+}
+
+.card{
+
+  padding:25px;
+
+  border-radius:22px;
+
+  color:#fff;
+
+  box-shadow:
+  0 10px 25px rgba(0,0,0,0.3);
+}
+
+.card h3{
+
+  font-size:22px;
+
+  margin-bottom:15px;
+}
+
+.card h1{
+
+  font-size:40px;
+}
+
+.entrada{
+
+  background:#10b981;
+}
+
+.saida{
+
+  background:#ef4444;
+}
+
+.total{
+
+  background:#2563eb;
+}
+
+/* ============================
+AÇÕES
+============================ */
+
+.botoes-area{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:15px;
+
+  margin-bottom:25px;
+}
+
+.botoes-area button{
+
+  flex:1;
+
+  min-width:220px;
+}
+
+#filtroTipo{
+
+  flex:1;
+
+  min-width:220px;
+
+  border:none;
+
+  border-radius:14px;
+
+  padding:14px;
+
+  font-size:16px;
+}
+
+/* ============================
+GRÁFICO
+============================ */
+
+.grafico-box{
+
+  background:#1e293b;
+
+  padding:25px;
+
+  border-radius:22px;
+
+  margin-bottom:30px;
+}
+
+/* ============================
+LISTA
+============================ */
+
+#listaMovimentacoes{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:15px;
+}
+
+.item{
+
+  background:#1e293b;
+
+  padding:20px;
+
+  border-radius:20px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:20px;
+
+  flex-wrap:wrap;
+}
+
+.item h4{
+
+  margin-bottom:5px;
+
+  font-size:20px;
+}
+
+.item small{
+
+  color:#cbd5e1;
+}
+
+.acoes-item{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+}
+
+.acoes-item strong{
+
+  font-size:20px;
+}
+
+.editar{
+
+  background:#2563eb;
+
+  color:#fff;
+
+  width:45px;
+
+  height:45px;
+
+  border-radius:12px;
+}
+
+.excluir{
+
+  background:#ef4444;
+
+  color:#fff;
+
+  width:45px;
+
+  height:45px;
+
+  border-radius:12px;
+}
+
+/* ============================
+MODAL
+============================ */
+
+.modal{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  background:
+  rgba(0,0,0,0.7);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:999;
+}
+
+.modal.hidden{
+
+  display:none;
+}
+
+.modal-box{
+
+  background:#1e293b;
+
+  width:100%;
+
+  max-width:500px;
+
+  border-radius:25px;
+
+  padding:30px;
+}
+
+.modal-box h2{
+
+  margin-bottom:25px;
+
+  font-size:28px;
+}
+
+.modal-box input,
+.modal-box select{
+
+  width:100%;
+
+  height:55px;
+
+  border:none;
+
+  border-radius:14px;
+
+  padding:0 15px;
+
+  margin-bottom:15px;
+
+  font-size:16px;
+}
+
+.modal-box button{
+
+  width:100%;
+}
+
+/* ============================
+HISTÓRICO
+============================ */
+
+#listaHistorico{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:15px;
+
+  margin-top:20px;
+}
+
+#listaHistorico .item{
+
+  background:#0f172a;
+}
+
+/* ============================
+LOGIN
+============================ */
+
+.auth-container{
+
+  max-width:450px;
+
+  margin:50px auto;
+
+  background:#1e293b;
+
+  padding:35px;
+
+  border-radius:25px;
+}
+
+.auth-container h1{
+
+  text-align:center;
+
+  margin-bottom:30px;
+}
+
+.tabs{
+
+  display:flex;
+
+  gap:10px;
+
+  margin-bottom:25px;
+}
+
+.tabs button{
+
+  flex:1;
+}
+
+.tabs .active{
+
+  background:#2563eb;
+
+  color:#fff;
+}
+
+.auth-box input{
+
+  width:100%;
+
+  height:55px;
+
+  border:none;
+
+  border-radius:14px;
+
+  padding:0 15px;
+
+  margin-bottom:15px;
+
+  font-size:16px;
+}
+
+.auth-box button{
+
+  width:100%;
+}
+
+/* ============================
+FOOTER
+============================ */
+
+footer{
+
+  margin-top:40px;
+
+  text-align:center;
+
+  color:#94a3b8;
+
+  font-size:14px;
+}
+
+/* ============================
+RESPONSIVO
+============================ */
+
+@media(max-width:700px){
+
+  #tituloPainel{
+
+    font-size:25px;
+  }
+
+  .card h1{
+
+    font-size:32px;
+  }
+
+  .item{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+  }
+
+  .acoes-item{
+
+    width:100%;
+
+    justify-content:space-between;
+  }
+
+  .botoes-area{
+
+    flex-direction:column;
+  }
+}
