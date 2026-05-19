@@ -590,6 +590,133 @@ async function finalizarMes(){
     return;
   }
 
+  // ============================
+  // BUSCAR MOVIMENTAÇÕES
+  // ============================
+
+  const { data, error } =
+  await supabaseClient
+  .from("movimentacoes")
+  .select("*")
+  .eq("usuario_id", usuarioAtual.id);
+
+  if(error){
+
+    alert(error.message);
+    return;
+  }
+
+  if(data.length === 0){
+
+    alert(
+      "Não há movimentações"
+    );
+
+    return;
+  }
+
+  // ============================
+  // CALCULAR
+  // ============================
+
+  let entradas = 0;
+  let saidas = 0;
+
+  data.forEach(item => {
+
+    if(item.tipo === "entrada"){
+
+      entradas += Number(item.valor);
+
+    } else {
+
+      saidas += Number(item.valor);
+    }
+  });
+
+  const saldo =
+  entradas - saidas;
+
+  // ============================
+  // MÊS
+  // ============================
+
+  const agora =
+  new Date();
+
+  const mes =
+  `${agora.getMonth()+1}/${agora.getFullYear()}`;
+
+  // ============================
+  // SALVAR HISTÓRICO
+  // ============================
+
+  const {
+    error:erroHistorico
+  } = await supabaseClient
+
+  .from("historico_mensal")
+
+  .insert([{
+
+    usuario_id:usuarioAtual.id,
+
+    mes,
+
+    entradas,
+
+    saidas,
+
+    saldo,
+
+    dados:data
+  }]);
+
+  if(erroHistorico){
+
+    alert(
+      erroHistorico.message
+    );
+
+    return;
+  }
+
+  // ============================
+  // LIMPAR DASHBOARD
+  // ============================
+
+  const {
+    error:erroDelete
+  } = await supabaseClient
+
+  .from("movimentacoes")
+
+  .delete()
+
+  .eq(
+    "usuario_id",
+    usuarioAtual.id
+  );
+
+  if(erroDelete){
+
+    alert(
+      erroDelete.message
+    );
+
+    return;
+  }
+
+  // ============================
+  // ATUALIZAR TELA
+  // ============================
+
+  carregarMovimentacoes();
+
+  alert(
+    "Mês finalizado com sucesso!"
+  );
+}
   const { data, error } =
   await supabaseClient
   .from("movimentacoes")
