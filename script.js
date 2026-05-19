@@ -574,3 +574,263 @@ Valor: R$ ${item.valor}
 
   link.click();
 }
+// ============================
+// FINALIZAR MÊS
+// ============================
+
+async function finalizarMes(){
+
+  const senha = prompt(
+    "Digite sua senha:"
+  );
+
+  if(senha !== usuarioAtual.senha){
+
+    alert("Senha incorreta");
+    return;
+  }
+
+  const { data, error } =
+  await supabaseClient
+  .from("movimentacoes")
+  .select("*")
+  .eq("usuario_id", usuarioAtual.id);
+
+  if(error){
+
+    alert(error.message);
+    return;
+  }
+
+  let entradas = 0;
+  let saidas = 0;
+
+  data.forEach(item => {
+
+    if(item.tipo === "entrada"){
+
+      entradas += Number(item.valor);
+
+    } else {
+
+      saidas += Number(item.valor);
+    }
+  });
+
+  const saldo =
+  entradas - saidas;
+
+  const agora =
+  new Date();
+
+  const mes =
+  `${agora.getMonth()+1}/${agora.getFullYear()}`;
+
+  const { error: erroHistorico } =
+  await supabaseClient
+  .from("historico_mensal")
+  .insert([{
+
+    usuario_id: usuarioAtual.id,
+
+    mes,
+
+    entradas,
+
+    saidas,
+
+    saldo,
+
+    dados:data
+  }]);
+
+  if(erroHistorico){
+
+    alert(erroHistorico.message);
+    return;
+  }
+
+  alert(
+    "Mês finalizado com sucesso!"
+  );
+}
+
+// ============================
+// ABRIR HISTÓRICO
+// ============================
+
+async function abrirHistoricoMensal(){
+
+  document
+  .getElementById("historicoModal")
+  .classList.remove("hidden");
+
+  carregarHistoricoMensal();
+}
+
+function fecharHistorico(){
+
+  document
+  .getElementById("historicoModal")
+  .classList.add("hidden");
+}
+
+// ============================
+// CARREGAR HISTÓRICO
+// ============================
+
+async function carregarHistoricoMensal(){
+
+  const { data, error } =
+  await supabaseClient
+  .from("historico_mensal")
+  .select("*")
+  .eq("usuario_id", usuarioAtual.id)
+  .order("id", { ascending:false });
+
+  if(error){
+
+    alert(error.message);
+    return;
+  }
+
+  const lista =
+  document.getElementById(
+    "listaHistorico"
+  );
+
+  lista.innerHTML = "";
+
+  data.forEach(item => {
+
+    lista.innerHTML += `
+
+      <div class="item">
+
+        <div>
+
+          <h3>
+            ${item.mes}
+          </h3>
+
+          <small>
+
+            Entradas:
+            R$ ${item.entradas}
+
+          </small>
+
+          <br>
+
+          <small>
+
+            Saídas:
+            R$ ${item.saidas}
+
+          </small>
+
+          <br>
+
+          <small>
+
+            Saldo:
+            R$ ${item.saldo}
+
+          </small>
+
+        </div>
+
+        <button
+          onclick="exportarPDFHistorico(${item.id})"
+        >
+
+          Exportar PDF
+
+        </button>
+
+      </div>
+
+    `;
+  });
+}
+
+// ============================
+// EXPORTAR PDF HISTÓRICO
+// ============================
+
+async function exportarPDFHistorico(id){
+
+  const { data, error } =
+  await supabaseClient
+  .from("historico_mensal")
+  .select("*")
+  .eq("id", id)
+  .single();
+
+  if(error){
+
+    alert(error.message);
+    return;
+  }
+
+  const { jsPDF } =
+  window.jspdf;
+
+  const doc =
+  new jsPDF();
+
+  doc.setFontSize(22);
+
+  doc.text(
+    "Histórico Financeiro",
+    20,
+    20
+  );
+
+  doc.setFontSize(14);
+
+  doc.text(
+    `Mês: ${data.mes}`,
+    20,
+    40
+  );
+
+  doc.text(
+    `Entradas: R$ ${data.entradas}`,
+    20,
+    55
+  );
+
+  doc.text(
+    `Saídas: R$ ${data.saidas}`,
+    20,
+    70
+  );
+
+  doc.text(
+    `Saldo: R$ ${data.saldo}`,
+    20,
+    85
+  );
+
+  let y = 110;
+
+  data.dados.forEach(item => {
+
+    doc.text(
+
+      `${item.descricao}
+${item.tipo}
+R$ ${item.valor}`,
+
+      20,
+      y
+    );
+
+    y += 20;
+  });
+
+  doc.save(
+    `historico-${data.mes}.pdf`
+  );
+}
